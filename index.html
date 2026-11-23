@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prompts del Taller — Colegio Alma Mater</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --text: #1e293b;
+      --muted: #64748b;
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --success: #16a34a;
+      --border: #e2e8f0;
+    }
+    * { box-sizing: border-box; font-family: system-ui, -apple-system, sans-serif; }
+    body {
+      margin: 0;
+      padding: 20px 16px 40px;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+    .container { max-width: 600px; margin: 0 auto; }
+    header { text-align: center; margin-bottom: 24px; }
+    .badge {
+      display: inline-block;
+      background: #dbeafe;
+      color: #1e40af;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 999px;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    h1 { font-size: 22px; margin: 0 0 6px; }
+    header p { color: var(--muted); font-size: 14px; margin: 0; }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    .card h2 { font-size: 17px; margin: 0 0 4px; color: var(--primary); }
+    .card .desc { font-size: 13px; color: var(--muted); margin: 0 0 14px; }
+    .prompt-box {
+      background: #f1f5f9;
+      border: 1px dashed #cbd5e1;
+      border-radius: 10px;
+      padding: 14px;
+      font-size: 15px;
+      color: #0f172a;
+      margin-bottom: 16px;
+      user-select: all;
+    }
+    .actions { display: flex; flex-direction: column; gap: 10px; }
+    button, a.btn-gemini {
+      width: 100%;
+      padding: 14px;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: background 0.2s, transform 0.1s;
+    }
+    button:active, a.btn-gemini:active { transform: scale(0.98); }
+    .btn-copy { background: var(--primary); color: #fff; }
+    .btn-copy:hover { background: var(--primary-hover); }
+    .btn-copy.copied { background: var(--success); }
+    .btn-gemini {
+      background: #eff6ff;
+      color: var(--primary);
+      border: 1px solid #bfdbfe;
+    }
+    footer {
+      text-align: center;
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 28px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <span class="badge">Taller Docente • Colegio Alma Mater</span>
+      <h1>Prompts listos para usar</h1>
+      <p>1. Toca "Copiar Prompt" &nbsp;•&nbsp; 2. Abre Gemini y pégalo</p>
+    </header>
+
+    <!-- PROMPT 1 -->
+    <div class="card">
+      <h2>Prompt 1: Planeación de clase en 30 segundos</h2>
+      <p class="desc">Ideal para diseñar una sesión completa de 50 minutos con actividad y cierre.</p>
+      <div class="prompt-box" id="p1">Actúa como profesor de secundaria en México. Diseña una clase de 50 minutos para alumnos de 2° grado sobre [Tema, ej. Las leyes de Newton / La Revolución Mexicana]. Incluye un inicio llamativo de 5 minutos, una actividad práctica en equipo con materiales sencillos y 3 preguntas de cierre.</div>
+      <div class="actions">
+        <button class="btn-copy" onclick="copiar('p1', this)">📋 Copiar Prompt 1</button>
+        <a class="btn-gemini" href="https://gemini.google.com/app" target="_blank" rel="noopener">✨ Abrir Google Gemini</a>
+      </div>
+    </div>
+
+    <!-- PROMPT 2 -->
+    <div class="card">
+      <h2>Prompt 2: Adaptar lecturas y crear exámenes</h2>
+      <p class="desc">Ideal para simplificar textos complejos y obtener 5 preguntas con respuestas.</p>
+      <div class="prompt-box" id="p2">Toma el siguiente texto y adáptalo para que sea claro y atractivo para alumnos de 1° de secundaria (12 años), sin perder los conceptos clave. Después, crea un examen rápido de 5 preguntas de opción múltiple con su hoja de respuestas al final: [Pegar texto o tema].</div>
+      <div class="actions">
+        <button class="btn-copy" onclick="copiar('p2', this)">📋 Copiar Prompt 2</button>
+        <a class="btn-gemini" href="https://gemini.google.com/app" target="_blank" rel="noopener">✨ Abrir Google Gemini</a>
+      </div>
+    </div>
+
+    <footer>
+      Impartido por <strong>Paolo Alejandro Barrera Díaz</strong><br>
+      Viernes 27 de noviembre
+    </footer>
+  </div>
+
+  <script>
+    function copiar(id, boton) {
+      const texto = document.getElementById(id).innerText;
+      navigator.clipboard.writeText(texto).then(() => {
+        const original = boton.innerText;
+        boton.innerText = '✅ ¡Copiado! Ahora pégalo en Gemini';
+        boton.classList.add('copied');
+        setTimeout(() => {
+          boton.innerText = original;
+          boton.classList.remove('copied');
+        }, 2500);
+      });
+    }
+  </script>
+</body>
+</html>
